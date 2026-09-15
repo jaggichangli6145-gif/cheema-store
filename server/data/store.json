@@ -3,7 +3,7 @@
     "username": "adminop",
     "passwordHash": "$2b$10$wbInSkhAGCTYIC9XI3FsKe6yE.xiz64.t9WasoIDPUVP58r44IMYe",
     "role": "Super Administrator",
-    "lastLogin": "2026-09-15T15:18:19.750Z"
+    "lastLogin": "2026-09-15T16:21:19.474Z"
   },
   "products": [
     {
@@ -792,6 +792,38 @@
     }
   ],
   "orders": [
+    {
+      "orderId": "CJ-631289",
+      "customer": {
+        "fullName": "Simranjeet Singh",
+        "email": "simran.singh@cheemajewels.com",
+        "phone": "+91 78142 49224",
+        "address": "Sector 17, Heritage Plaza",
+        "city": "Chandigarh",
+        "pincode": "160017",
+        "notes": "Gift wrap with luxury gold ribbon"
+      },
+      "items": [
+        {
+          "id": "cj-01",
+          "name": "Kundan Polki Bridal Choker Set",
+          "price": 385000,
+          "quantity": 1,
+          "metal": "22K Yellow Gold",
+          "gemstone": "Uncut Polki & Zambian Emeralds"
+        }
+      ],
+      "subtotal": 385000,
+      "discountAmount": 0,
+      "shipping": 0,
+      "total": 396550,
+      "orderStatus": "Confirmed",
+      "paymentStatus": "Paid",
+      "paymentMethod": "card",
+      "date": "September 15, 2026",
+      "createdAt": "2026-09-15T16:21:19.521Z",
+      "updatedAt": "2026-09-15T16:21:19.543Z"
+    },
     {
       "orderId": "CJ-708821",
       "customer": {

@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { BRAND } from '../../data/brand';
 
-export default function Footer({ onOpenCatalog, onOpenContact, onSelectCategory }) {
+export default function Footer({ onOpenCatalog, onOpenContact, onSelectCategory, onOpenStaffLogin }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -157,15 +157,22 @@ export default function Footer({ onOpenCatalog, onOpenContact, onSelectCategory 
 
           <div className="space-y-3">
             <h4 className="text-sm uppercase font-semibold text-white tracking-widest font-serif border-b border-[#2C2925] pb-2">
-              About
+              House &amp; Heritage
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Our Story & Heritage</a></li>
+              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Our Story &amp; Heritage</a></li>
               <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Artisanal Craftsmanship</a></li>
-              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Careers at Cheema</a></li>
               <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Store Locator</a></li>
-              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Terms & Conditions</a></li>\n              <li><a href="/admin/login" className="text-gold-500 font-semibold hover:text-gold-300 transition-colors flex items-center gap-1"><span>Staff / Admin Portal &rarr;</span></a></li>
+              <li><a href="#why-us" className="hover:text-gold-400 transition-colors">Privacy &amp; Terms</a></li>
+              <li className="pt-1">
+                <button 
+                  onClick={onOpenStaffLogin}
+                  className="text-gold-400 hover:text-white font-semibold flex items-center gap-1.5 transition-colors group"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-gold-500" />
+                  <span>Staff Login &amp; Portal &rarr;</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -173,10 +180,17 @@ export default function Footer({ onOpenCatalog, onOpenContact, onSelectCategory 
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-[#23201D] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#8A857D]">
-        <div className="flex items-center gap-2 text-center sm:text-left">
+        <div className="flex flex-wrap items-center gap-2 text-center sm:text-left">
           <span>&copy; {new Date().getFullYear()} {BRAND.name}. All Rights Reserved.</span>
-          <span className="hidden sm:inline">&bull;</span>
+          <span>&bull;</span>
           <span className="text-gold-500">Concierge: {BRAND.phone}</span>
+          <span>&bull;</span>
+          <button 
+            onClick={onOpenStaffLogin} 
+            className="text-gray-400 hover:text-gold-400 transition-colors text-[11px]"
+          >
+            Staff Access
+          </button>
         </div>
 
         <div className="flex items-center space-x-4">

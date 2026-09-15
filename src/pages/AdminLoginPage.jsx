@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
               CHEEMA JEWELS
             </h1>
             <div className="text-[10px] uppercase tracking-[0.35em] text-gold-400 font-semibold mt-0.5">
-              Executive Administration Portal
+              Staff &amp; Executive Command Centre
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function AdminLoginPage() {
         <form onSubmit={handleSubmit} className="space-y-5 text-xs">
           <div>
             <label className="block text-gray-300 font-medium mb-1.5 uppercase tracking-wider text-[11px]">
-              Admin Identity ID
+              Staff ID / Admin ID
             </label>
             <div className="relative">
               <User className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter Admin ID"
+                placeholder="Enter Staff ID (e.g. adminop)"
                 className="w-full pl-10 pr-4 py-3 bg-[#141312] border border-[#3A3731] rounded-xl text-white placeholder:text-gray-500 outline-none focus:border-gold-400 transition-colors text-xs"
               />
             </div>
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
 
           <div>
             <label className="block text-gray-300 font-medium mb-1.5 uppercase tracking-wider text-[11px]">
-              Access Password
+              Staff Password
             </label>
             <div className="relative">
               <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -122,7 +122,7 @@ export default function AdminLoginPage() {
                 <span>Verifying Credentials...</span>
               ) : (
                 <>
-                  <span>Sign In to Dashboard</span>
+                  <span>Sign In as Staff</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

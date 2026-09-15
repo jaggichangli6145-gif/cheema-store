@@ -21,6 +21,9 @@ import CartDrawer from './components/common/CartDrawer';
 import WishlistDrawer from './components/common/WishlistDrawer';
 import CheckoutModal from './components/common/CheckoutModal';
 import ContactModal from './components/common/ContactModal';
+import StaffLoginModal from './components/common/StaffLoginModal';
+import { ShieldCheck, LayoutDashboard, LogOut } from 'lucide-react';
+import { useAdminAuth } from './context/AdminAuthContext';
 
 // Home Sections
 import Hero from './components/home/Hero';
@@ -43,11 +46,13 @@ import ShopCatalogModal from './components/shop/ShopCatalogModal';
 import CustomizerModal from './components/customizer/CustomizerModal';
 
 function CustomerStorefront() {
+  const { isAuthenticated, adminUser, logout } = useAdminAuth();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [catalogCategory, setCatalogCategory] = useState('all');
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const [isStaffLoginOpen, setIsStaffLoginOpen] = useState(false);
 
   // Active product modals
   const [quickViewProduct, setQuickViewProduct] = useState(null);
@@ -73,6 +78,7 @@ function CustomerStorefront() {
         onOpenCustomizer={() => setIsCustomizerOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
         onSelectCategory={handleOpenCatalogWithCategory}
+        onOpenStaffLogin={() => setIsStaffLoginOpen(true)}
       />
 
       <main className="flex-1">
@@ -144,9 +150,47 @@ function CustomerStorefront() {
         onOpenCatalog={() => handleOpenCatalogWithCategory('all')}
         onOpenContact={() => setIsContactOpen(true)}
         onSelectCategory={handleOpenCatalogWithCategory}
+        onOpenStaffLogin={() => setIsStaffLoginOpen(true)}
       />
 
+      {/* Floating Staff Portal Indicator (When logged in) */}
+      {isAuthenticated && (
+        <div className="fixed bottom-6 right-6 z-40 bg-[#171615] text-white py-2.5 px-4 rounded-2xl border border-gold-400/60 shadow-2xl flex items-center gap-3.5 animate-fade-in backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span className="text-xs">
+              <span className="text-gray-400">Staff: </span>
+              <strong className="text-gold-300 font-semibold">{adminUser?.username || 'adminop'}</strong>
+            </span>
+          </div>
+          <div className="flex items-center gap-2 border-l border-[#33302B] pl-3">
+            <a
+              href="/admin"
+              className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-charcoal-950 font-bold text-xs hover:opacity-95 transition-all shadow flex items-center gap-1.5"
+            >
+              <LayoutDashboard className="w-3.5 h-3.5" />
+              <span>Staff Dashboard</span>
+            </a>
+            <button
+              onClick={logout}
+              className="p-1.5 text-gray-400 hover:text-red-400 transition-colors rounded-lg hover:bg-white/5"
+              title="Staff Sign Out"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Global Interactive Modals & Drawers */}
+      <StaffLoginModal
+        isOpen={isStaffLoginOpen}
+        onClose={() => setIsStaffLoginOpen(false)}
+      />
+
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}

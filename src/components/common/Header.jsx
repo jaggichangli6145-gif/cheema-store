@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Search, Heart, ShoppingBag, Menu, X, Phone, Sparkles, 
-  ChevronDown, MessageCircle, Gem 
+  ChevronDown, MessageCircle, Gem, ShieldCheck, LayoutDashboard 
 } from 'lucide-react';
 import { BRAND } from '../../data/brand';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useCurrency, CURRENCIES } from '../../context/CurrencyContext';
+import { useAdminAuth } from '../../context/AdminAuthContext';
 
 export default function Header({ 
   onOpenSearch, 
   onOpenCatalog, 
   onOpenCustomizer, 
   onOpenContact, 
-  onSelectCategory 
+  onSelectCategory,
+  onOpenStaffLogin
 }) {
+  const { isAuthenticated, adminUser } = useAdminAuth();
   const { totalItemsCount, setIsCartOpen } = useCart();
   const { wishlistCount, setIsWishlistOpen } = useWishlist();
   const { currentCurrency, setCurrentCurrency } = useCurrency();
@@ -85,6 +88,28 @@ export default function Header({
               <MessageCircle className="w-3 h-3 text-green-400" />
               <span className="hidden md:inline">WhatsApp Assistance</span>
             </a>
+
+            <span className="text-[#4E4A44]">|</span>
+
+            {isAuthenticated ? (
+              <a
+                href="/admin"
+                className="flex items-center gap-1.5 text-gold-300 hover:text-white transition-colors bg-gold-950/60 px-2 py-0.5 rounded border border-gold-700/60"
+                title="Open Staff Control Centre"
+              >
+                <LayoutDashboard className="w-3 h-3 text-gold-400" />
+                <span>Staff: <strong className="text-white">{adminUser?.username || 'adminop'}</strong></span>
+              </a>
+            ) : (
+              <button
+                onClick={onOpenStaffLogin}
+                className="flex items-center gap-1.5 text-[#E6DFD5] hover:text-gold-300 transition-colors"
+                title="Staff Login &amp; Management"
+              >
+                <ShieldCheck className="w-3 h-3 text-gold-400" />
+                <span>Staff Login</span>
+              </button>
+            )}
 
             <span className="text-[#4E4A44]">|</span>
 
@@ -216,6 +241,27 @@ export default function Header({
                 </span>
               )}
             </button>
+
+            {/* Staff Portal Header Button */}
+            {isAuthenticated ? (
+              <a
+                href="/admin"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gold-500 bg-gold-50 text-gold-900 hover:bg-gold-500 hover:text-white transition-all text-xs font-semibold shadow-sm"
+                title="Staff Management Dashboard"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                <span>Staff Panel</span>
+              </a>
+            ) : (
+              <button
+                onClick={onOpenStaffLogin}
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-gray-300 hover:border-gold-500 text-charcoal-700 hover:text-gold-700 transition-all text-xs font-medium"
+                title="Staff & Management Login"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-gold-600" />
+                <span>Staff</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -262,8 +308,33 @@ export default function Header({
 
               <div className="pt-4 border-t border-champagne-200">
                 <div className="text-xs font-semibold text-charcoal-500 uppercase tracking-widest mb-3">
-                  Direct Concierge
+                  Staff &amp; Concierge
                 </div>
+
+                {isAuthenticated ? (
+                  <a
+                    href="/admin"
+                    className="flex items-center gap-3 p-3 bg-gold-500 text-charcoal-950 font-bold rounded-lg text-sm mb-3 shadow"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    <div>
+                      <div className="text-xs">Staff Dashboard Active</div>
+                      <div className="text-[11px] font-normal">Manage Orders &amp; Inventory &rarr;</div>
+                    </div>
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenStaffLogin();
+                    }}
+                    className="w-full flex items-center gap-3 p-3 bg-charcoal-900 text-gold-400 font-semibold rounded-lg text-sm mb-3 hover:bg-black transition-colors"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-gold-400" />
+                    <span>Staff Login Portal &rarr;</span>
+                  </button>
+                )}
+
                 <a 
                   href={`tel:${BRAND.phone}`}
                   className="flex items-center gap-3 p-3 bg-gold-50 border border-gold-300 rounded-lg text-charcoal-900 font-medium text-sm mb-2"

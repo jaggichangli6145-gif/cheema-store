@@ -50,7 +50,7 @@ export default function AdminLayout({ activeTab, setActiveTab, pendingOrdersCoun
                   CHEEMA
                 </div>
                 <div className="text-[9px] uppercase tracking-[0.3em] text-gold-400 font-semibold mt-0.5">
-                  Admin Portal
+                  Staff Command Centre
                 </div>
               </div>
             </div>
@@ -100,15 +100,22 @@ export default function AdminLayout({ activeTab, setActiveTab, pendingOrdersCoun
         </div>
 
         {/* Sidebar Footer */}
-        <div className="p-4 border-t border-[#2C2925] space-y-3">
+        <div className="p-4 border-t border-[#2C2925] space-y-2.5">
+          <a
+            href="/"
+            className="w-full py-2.5 px-3 rounded-xl border border-gold-500/30 text-gold-300 hover:bg-gold-950/40 hover:text-white transition-colors text-xs font-semibold flex items-center justify-center gap-2"
+          >
+            <span>&larr; Return to Storefront</span>
+          </a>
+
           <div className="px-3 py-2 bg-[#22201D] rounded-xl border border-[#33302B] flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-full bg-gold-400/20 text-gold-300 flex items-center justify-center font-bold text-xs">
-                {adminUser?.username?.[0]?.toUpperCase() || 'A'}
+                {adminUser?.username?.[0]?.toUpperCase() || 'S'}
               </div>
               <div className="truncate">
                 <div className="font-semibold text-white truncate text-[11px]">{adminUser?.username || 'adminop'}</div>
-                <div className="text-[9px] text-gold-400 uppercase tracking-wider">{adminUser?.role || 'Administrator'}</div>
+                <div className="text-[9px] text-gold-400 uppercase tracking-wider">{adminUser?.role || 'Staff / Manager'}</div>
               </div>
             </div>
             <Shield className="w-3.5 h-3.5 text-gold-400" />
@@ -116,10 +123,10 @@ export default function AdminLayout({ activeTab, setActiveTab, pendingOrdersCoun
 
           <button
             onClick={logout}
-            className="w-full py-2.5 px-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-950/40 hover:text-red-300 transition-colors text-xs font-semibold flex items-center justify-center gap-2"
+            className="w-full py-2 px-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-950/40 hover:text-red-300 transition-colors text-xs font-semibold flex items-center justify-center gap-2"
           >
-            <LogOut className="w-4 h-4" />
-            <span>Sign Out</span>
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Staff Sign Out</span>
           </button>
         </div>
 
